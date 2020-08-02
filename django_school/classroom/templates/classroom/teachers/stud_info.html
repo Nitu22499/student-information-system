@@ -1,0 +1,42 @@
+{% extends 'base2.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+
+
+
+<div class="container-fluid ">
+    <div class="container-fluid ">
+            <br><h2 align='center'><B>ATTENDENCE</B></h2><br>
+            <p><strong>Note: </strong>Mark for Present Students only.</p>
+    </div><br>  
+     <form>
+        <table class="table  table-hover  table-bordered">
+            <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>{{time}}</th>
+                  
+                </tr>
+            </thead>
+            <tbody>
+                {% for stud in stud_list %}
+                    <tr>
+                        <td>{{ stud.user.last_name }} {{ stud.user.first_name }}</td>
+                        <td>{{ stud.user.email }}</td>
+                        <td> <label class="switch">
+                            <input id="toggle-slider_position()" type="checkbox">
+                            <!-- <span class="slider round"></span> -->
+                            </label> </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <center><button type="submit" class="btn btn-success">Submit</button></center>
+     </form>
+   
+
+</div>
+{% endblock %}

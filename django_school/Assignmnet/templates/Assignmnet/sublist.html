@@ -1,0 +1,41 @@
+{% extends 'base2.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+<br>
+
+    <div class="container-fluid my-5">
+            <h2 align='center'><B>Subject List</B></h2><hr>
+    </div> 
+
+
+
+<div class="container-fluid my-5">
+        <div class="row justify-content-center">
+          <div class="col-md-11 col-sm-10">
+            <div class="card">
+              <div class="card-body">
+        <table class="table  table-hover  table-bordered">
+            <thead>
+                <tr>
+                  <th>Subjects</th>
+                  <th></th>
+                  
+                </tr>
+            </thead>
+            <tbody>
+                {% for stub in sub_list %}
+                    <tr>
+                        <td>{{ stub }} </td>
+                        <td> <a href="{% url 'teachassgn' stub %}" class="btn btn-primary"  >Add Assignment
+                        </a></td>                       
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+       
+</div></div></div></div>
+</div>
+
+{% endblock%}

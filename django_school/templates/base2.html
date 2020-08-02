@@ -1,0 +1,164 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}E classroom{% endblock %}</title>
+    <link rel="icon" href="{% static 'img/favicon.png' %}">
+    <link href="https://fonts.googleapis.com/css?family=Clicker+Script" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/fontello-2f186091/css/fontello.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    {% if user.is_authenticated and user.is_teacher %}
+      <link rel="stylesheet" type="text/css" href="{% static 'css/teachers.css' %}">
+    {% else %}
+      <link rel="stylesheet" type="text/css" href="{% static 'css/students.css' %}">
+    {% endif %}
+</head>
+<body>
+
+<!--Name-->
+  <nav class="navbar navbar-expand-sm  fixed-top" style="background-color: darkblue">
+    <div class="navbar-header">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#" style="color:rgb(250, 248, 248) ;font-family: 'Satisfy', 'cursive' ;">&nbsp &nbsp   
+      <B><U>E-Classroom</U></B></a>
+    </div><div class="col-1"></div>
+
+    <!--Navbar elements-->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav navbar-center">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}" style="color:rgb(250, 248, 248)">
+          <span class="fa fa-home fa-lg" aria-hidden="true" ></span> Home</a>
+        </li>
+        <li class="nav-item">
+          <a  class="nav-link" href="#aboutsection" style="color:rgb(250, 248, 248)"> About</a>
+        </li>  
+        {% if user.is_authenticated %}
+          {% if user.is_teacher %}
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown" href="#" style="color:rgb(250, 248, 248)">My Administration 
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu" style="background-color: darkblue">
+                <li><a href="{% url 'subject' %}" style="color:rgb(250, 248, 248)"><center>Mark Attendance</center></a></li><hr>
+                <li><a href="{% url 'teach_sublist' %}" style="color:rgb(250, 248, 248)"><center>Add Study Material</center></a></li><hr>
+                <li><a href="{% url 'attendence' %}" style="color:rgb(250, 248, 248)"><center>Defaulter List</center></a></li><hr>
+                <li><a href="{% url 'teach_sublist' %}" style="color:rgb(250, 248, 248)"><center>Edit Study Material</center></a></li>
+              </ul>
+            </li>
+          {% else %}
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown" href="#" style="color:rgb(250, 248, 248)">My Administration 
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu" style="background-color: darkblue">
+                <li><a href="{% url 'attendence' %}" style="color:rgb(250, 248, 248)"><center>Attendence</center></a></li><hr>
+                <li><a href="{% url 'studentassgn' %}" style="color:rgb(250, 248, 248)"><center>Study Material</center></a></li>
+              </ul>
+            </li>
+          {% endif %}
+        {% endif %}    
+        
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+          <li class="nav-item" ><a style="color:rgb(250, 248, 248)" class="nav-link" href="#" ><span class="fa fa-user fa-lg" ></span> {{ user.username }}</a></li>
+          <li class="nav-item" ><a style="color:rgb(250, 248, 248)" class="nav-link" href="{% url 'logout' %}" ><span class="fa fa-sign-out fa-lg" ></span>&nbsp Logout</a></li>  
+        {% else %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}" style="color:rgb(250, 248, 248)">
+            <span class="fa fa-sign-in fa-lg" ></span>&nbsp Login</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'signup' %}" class="btn btn-primary" role="button">Sign up</a>
+          </li>  
+        {% endif %}
+      </ul>
+    </div>
+    
+  </nav>
+ 
+  
+    <!-- <div class="row justify-content-center">
+      {% if user.is_authenticated %}
+        {% if user.is_teacher %}
+          <span class="" data-toggle="tooltip" data-placement="right" title="Teacher profile"></span>
+        {% else %}
+          <span class="" data-toggle="tooltip" data-placement="right" title="Student profile"></span>
+        {% endif %}
+      {% endif %}          
+    </div> -->
+    {% for message in messages %}
+      <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+
+    {% block body %}
+    {% endblock %}
+            
+ <br><br><br><br><br>
+ <div class="container-fluid" style="background-color: rgb(8, 8, 97)">
+  <footer class="container" ><br><br>
+    <div class="footer_top">
+      <div class="container">
+          <div class="row">
+              <div class="col-xl-4 col-md-6 col-lg-4">
+                  <div class="footer_widget">
+                      
+                      <ul style="color:rgb(250, 248, 248)">
+                          <li><a href="{% url 'home' %}" style="color:rgb(250, 248, 248)">Home</a></li>
+                          <li><a href="#" style="color:rgb(250, 248, 248)">About us</a></li>
+                          <li><a href="{% url 'attendence' %}" style="color:rgb(250, 248, 248)">Attendance</a></li>
+                          <li><a href="{% url 'studentassgn' %}" style="color:rgb(250, 248, 248)" >Assignment</a></li>
+                         
+                      </ul>
+                  </div>
+              </div>
+              
+              <div class="col-xl-5 col-md-6 col-lg-5">
+                  <div class="footer_widget">
+                      <h3 class="footer_title" style="color:rgb(250, 248, 248)">
+                          Contact Us
+                      </h3>
+                      <ul style="color:rgb(250, 248, 248)">
+                          <li><a href="#" style="color:rgb(250, 248, 248)">Nitu Sharma -8291609098</a></li>
+                          <li><a href="#" style="color:rgb(250, 248, 248)">Saloni Bandgar - 8291609098</a></li>
+                          <li><a href="#" style="color:rgb(250, 248, 248)">Sonam Anekar -8291609098</a></li>
+                         
+                      </ul>
+                  </div>
+              </div>
+              <div class="col-xl-3 col-md-6 col-lg-3">
+                  <div class="footer_widget">
+                      <h3 class="footer_title" style="color:rgb(250, 248, 248)">
+                          Address
+                      </h3>
+                      <p style="color:rgb(250, 248, 248)">
+                          K.T. Marg, Vasai Road (W), <br>Dist-Palghar,<br> Vasai-Virar,<br> Maharashtra 401202
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+    <!-- <p style="color:rgb(250, 248, 248)">Developed by: Nitu Sharma, Saloni Bandgar And Sonam Anekar</p>
+    <p style="color:rgb(250, 248, 248)">Contact Us: <a href="mailto:nitus@hmail.com.com" style="color:rgb(250, 248, 248)"><br>nitus22499@gmail.com ( 8291609098)<br>bandgarsaloni@gmail.com   (9323391212)<br>Sonam@gmail.com   ( 7666956882)</a></p><br><br><br><br<br> -->
+  </footer>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+})
+</script>
+</body>
+</html>

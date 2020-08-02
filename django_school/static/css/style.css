@@ -1,0 +1,39 @@
+/* body {
+    background-image:url("https://ak8.picdn.net/shutterstock/videos/12107498/thumb/1.jpg");
+} */
+
+.navbar{
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+.carousel {
+    position: relative;
+    height:570px;
+}
+
+.carousel-inner{
+    position: relative;
+    height:570px;
+}
+
+
+div [class="col-sm-5 col-md-4 col-lg-3 feature"]{
+    border:0.5px solid;
+    padding:20px 40px;
+    margin:40px;
+}
+
+div [class="col-sm-5 col-md-4 col-lg-3 feature"]:hover{
+    box-shadow: 0 20px 20px 0 rgba(0,0,0,0.2);
+    background-color: #341677;
+    color:white;
+}
+
+span [class="navbar-toggler-icon"]{
+width: 35px;
+  height: 5px;
+  background-color: black;
+  margin: 6px 0;
+
+}

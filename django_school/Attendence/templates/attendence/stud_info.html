@@ -1,0 +1,45 @@
+{% extends 'base2.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+
+<br>
+
+<div class="container-fluid my-5">
+    <div class="container-fluid ">
+            <h2 align='center'><B>{{ subject }} Attendance</B></h2>
+            <p><strong>Note: </strong>Mark for Present Students only.</p>
+    </div> 
+    <div class="row justify-content-center">
+            <div class="col-md-11 col-sm-10">
+              <div class="card">
+                <div class="card-body">
+    <form method = "post" action = "{% url 'submit' subject %}">
+            {% csrf_token %}
+        <table class="table  table-hover  table-bordered">
+            <thead>
+                <tr>
+                  <th>Student Name</th>                  
+                  <th>{{date}}</th>
+                  
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for stu in stud %}
+                
+                    <tr>
+                        <td>{{ stu.first_name }} {{ stu.last_name }}</td>
+                        
+                        <td> <input type="checkbox" name="checks[]" value="{{ stu.id }}"></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <center><input type = "submit" value = "Mark Attendence">
+        </center>
+    </form>
+</div></div></div></div>
+</div>
+{% endblock %}

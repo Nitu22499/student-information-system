@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+
+<div class="container-fluid">
+        <div class ="container" ><br>
+            <h1><strong><center>Students List</center></strong></h1>
+        </div>
+       
+<!-- <div class = "container">
+    <a href = "{% url 'attendence' %}"><button class = "btn btn-primary btn-lg">Attendence Report</button></a>
+</div> -->
+
+<div class="row justify-content-center">
+        <div class="col-md-11 col-sm-10">
+          <div class="card">
+            <div class="card-body">
+        <table class="table  table-hover  table-bordered">
+            <thead>
+                <tr>
+                  <th>Student Name</th>
+                  <th>Email</th>
+                  
+                </tr>
+            </thead>
+            <tbody>
+                {% for stud in stud_list %}
+                    <tr>
+                            <td>{{ stud.user.first_name }} {{ stud.user.last_name }}</td>
+                            <td>{{ stud.user.email }}</td>
+                               
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+       
+    
+   
+</div></div></div></div>
+</div>
+
+{% endblock%}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+
+<div class="container my-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {% for error in form.non_field_errors %}
+                <p{% if forloop.last %} class="mb-0"{% endif %}>{{ error }}</p>
+              {% endfor %}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+          <div class="row">
+            <div class="col-12 text-center">
+              <h2><strong>Log in</strong></h2><br>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-8 col-md-6 col-sm-8 col-12">
+              <form method="post" novalidate>
+                {% csrf_token %}
+                  <input type="hidden" name="next" value="{{ next }}">
+                  {{ form.username|as_crispy_field }}
+                  {{ form.password|as_crispy_field }}
+                    <div class="col-md-4">
+                      <button type="submit" class="btn btn-primary">Log in</button><br><br>
+                    </div>
+                    <div class="row">
+                      <br>
+                      <p>Don't have an account?</p>&nbsp&nbsp&nbsp
+                      <a href="{% url 'signup' %}" class="btn btn-primary" role="button">Sign up</a>
+                    </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>
+
+{% endblock %}
